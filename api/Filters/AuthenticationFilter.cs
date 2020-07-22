@@ -9,10 +9,17 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace API.Filters
 {
+    /// <summary>
+    /// Authentication filter.
+    /// </summary>
     public class AuthenticationFilter : IAuthenticationFilter
     {
         private SecurityToken _validatedToken;
 
+        /// <summary>
+        /// Gets a value indicating whether this <see cref="T:API.Filters.AuthenticationFilter"/> allow multiple.
+        /// </summary>
+        /// <value><c>true</c> if allow multiple; otherwise, <c>false</c>.</value>
         public bool AllowMultiple
         {
             get
@@ -26,31 +33,16 @@ namespace API.Filters
 
             var request = context.Request;
             var authorization = request.Headers.Authorization;
-            string unauthorizedMsg = "Authorization has been denied for this request.";
+            string msg = "Authorization has been denied for this request.";
 
             if (authorization == null)
-            {
-                return Task.FromResult<object>(new
-                {
-                    msg = unauthorizedMsg
-                });
-            }
+                return Task.FromResult<object>(new { msg });
 
             if (authorization.Scheme != "Bearer")
-            {
-                return Task.FromResult<object>(new
-                {
-                    msg = unauthorizedMsg
-                });
-            }
+                return Task.FromResult<object>(new { msg });
 
             if (string.IsNullOrEmpty(authorization.Parameter))
-            {
-                return Task.FromResult<object>(new
-                {
-                    msg = unauthorizedMsg
-                });
-            }
+                return Task.FromResult<object>(new { msg });
 
             var tokenHandler = new JwtSecurityTokenHandler();
 
@@ -68,21 +60,21 @@ namespace API.Filters
 
                 context.Principal = claims;
 
-                return Task.FromResult<object>(new
-                {
-                    msg = unauthorizedMsg
-                });
+                return Task.FromResult<object>(new{ msg });
             }
             catch
             {
-                return Task.FromResult<object>(new
-                {
-                    msg = unauthorizedMsg
-                });
+                return Task.FromResult<object>(new { msg });
             }
 
         }
 
+        /// <summary>
+        /// Challenges the async.
+        /// </summary>
+        /// <returns>The async.</returns>
+        /// <param name="context">Context.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
         public Task ChallengeAsync(HttpAuthenticationChallengeContext context, CancellationToken cancellationToken)
         {
             return Task.FromResult(0);

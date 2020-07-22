@@ -17,6 +17,7 @@ namespace API.Controllers
         /// <returns>The test.</returns>
         [HttpGet]
         [AllowAnonymous]
+        [Route("api/user/test")]
         public bool Test()
         {
             return true;
@@ -53,7 +54,7 @@ namespace API.Controllers
         [HttpPost]
         [AllowAnonymous]
         [Route("api/user/register")]
-        public object Register(User user)
+        public object Register([FromBody]User user)
         {
             if(!ModelState.IsValid)
                 return BadRequest(ModelState.Values.SelectMany(start => start.Errors).Select(error => error.ErrorMessage).Take(1).ElementAt(0));

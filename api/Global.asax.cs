@@ -12,7 +12,7 @@ namespace API
     /// <summary>
     /// Global.
     /// </summary>
-    public class Global : HttpApplication
+    public class Global : System.Web.HttpApplication
     {
         /// <summary>
         /// Applications the error.

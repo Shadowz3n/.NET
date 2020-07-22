@@ -56,6 +56,38 @@ namespace API.Models
         public DateTime? DeletedAt { get; set; }
     }
 
+    public class UserRegister
+    {
+        [Column("Name")]
+        public string Name { get; set; }
+        public string Lastname { get; set; }
+
+        [Column("Email")]
+        [Required(ErrorMessage = "error.validation.invalid-email")]
+        public string Email { get; set; }
+
+        [Column("Password")]
+        [Required(ErrorMessage = "error.validation.invalid-password")]
+        public string Password { get; set; }
+        public string CheckPassword { get; set; }
+        public int CityID { get; set; }
+        public int StateID { get; set; }
+        public string Cpf { get; set; }
+        public string Cnpj { get; set; }
+
+        [Required(ErrorMessage = "error.validation.invalid-phone")]
+        public string Phone { get; set; }
+
+        [NotMapped]
+        [Required(ErrorMessage = "error.validation.invalid-token")]
+        public string Token { get; set; }
+
+        public int RoleID { get; set; }
+
+        [DataType(DataType.DateTime, ErrorMessage = "error.validation.invalid-created-at")]
+        public DateTime CreatedAt { get; set; }
+    }
+
     /// <summary>
     /// User login.
     /// </summary>

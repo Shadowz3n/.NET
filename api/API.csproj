@@ -119,6 +119,8 @@
     <Folder Include="DAL\" />
     <Folder Include="Services\" />
     <Folder Include="Filters\" />
+    <Folder Include="Utils\Validation\" />
+    <Folder Include="Utils\Helper\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\HomeController.cs" />
@@ -130,7 +132,6 @@
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\State.cs" />
-    <Compile Include="Utils\Constants.cs" />
     <Compile Include="Models\Request.cs" />
     <Compile Include="Controllers\StateController.cs" />
     <Compile Include="Controllers\RestrictedController.cs" />
@@ -139,6 +140,13 @@
     <Compile Include="Models\Log.cs" />
     <Compile Include="Filters\AuthenticationFilter.cs" />
     <Compile Include="Filters\FilterConfig.cs" />
+    <Compile Include="Filters\TokenManager.cs" />
+    <Compile Include="Utils\Validation\CnpjValidation.cs" />
+    <Compile Include="Utils\Validation\CpfValidation.cs" />
+    <Compile Include="Utils\Validation\EmailValidation.cs" />
+    <Compile Include="Utils\Validation\PasswordValidation.cs" />
+    <Compile Include="Utils\Helper\Session.cs" />
+    <Compile Include="Utils\Helper\Constants.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />
