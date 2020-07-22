@@ -5,4 +5,5 @@
 * Database Connection
 * Swagger
 * API Route Filter
-
+* Google Recaptcha
+* HCaptcha
