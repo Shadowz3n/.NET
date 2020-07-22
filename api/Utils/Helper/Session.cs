@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Web.Security;
 
-namespace API.Utils
+namespace API.Utils.Helper
 {
     public class APISession : Controller
     {

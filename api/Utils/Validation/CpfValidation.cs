@@ -1,4 +1,4 @@
-﻿namespace API.Utils
+﻿namespace API.Utils.Validation
 {
     public static class CpfValidation
     {

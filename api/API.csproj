@@ -147,6 +147,12 @@
     <Compile Include="Utils\Validation\PasswordValidation.cs" />
     <Compile Include="Utils\Helper\Session.cs" />
     <Compile Include="Utils\Helper\Constants.cs" />
+    <Compile Include="Models\WhiteList.cs" />
+    <Compile Include="Utils\Helper\GoogleRecaptcha.cs" />
+    <Compile Include="Services\BaseService.cs" />
+    <Compile Include="Models\Google.cs" />
+    <Compile Include="Utils\Helper\HCaptcha.cs" />
+    <Compile Include="Models\HCaptcha.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />

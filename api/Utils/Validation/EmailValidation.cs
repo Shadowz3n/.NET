@@ -1,6 +1,6 @@
 ﻿using System.Net.Mail;
 
-namespace API.Utils
+namespace API.Utils.Validation
 {
     public static class EmailValidation
     {

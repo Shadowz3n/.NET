@@ -1,4 +1,4 @@
-﻿namespace API.Utils
+﻿namespace API.Utils.Helper
 {
     /// <summary>
     /// Constants.

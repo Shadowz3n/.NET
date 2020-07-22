@@ -2,7 +2,7 @@
 using System.Text.RegularExpressions;
 using API.Models;
 
-namespace API.Utils
+namespace API.Utils.Validation
 {
     public class PassValidation
     {
