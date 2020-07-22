@@ -1,1 +1,1 @@
-﻿<%@ Application Inherits="api.Global" %>
+﻿<%@ Application Inherits="API.Global" %>
