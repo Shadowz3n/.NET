@@ -4,6 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace API.Models
 {
+    /// <summary>
+    /// User.
+    /// </summary>
     public class User
     {
         [Key]
@@ -53,6 +56,9 @@ namespace API.Models
         public DateTime? DeletedAt { get; set; }
     }
 
+    /// <summary>
+    /// User login.
+    /// </summary>
     public class UserLogin
     {
         [Required]
@@ -69,6 +75,9 @@ namespace API.Models
         public string UToken { get; set; }
     }
 
+    /// <summary>
+    /// User roles.
+    /// </summary>
     public class UserRoles
     {
         public int ID { get; set; }

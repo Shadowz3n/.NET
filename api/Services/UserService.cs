@@ -7,10 +7,18 @@ using API.Models;
 
 namespace API.Services
 {
+    /// <summary>
+    /// User service.
+    /// </summary>
     public class UserService : DbContext
     {
         private APIContext db = new APIContext();
 
+        /// <summary>
+        /// List the specified searchParams.
+        /// </summary>
+        /// <returns>The list.</returns>
+        /// <param name="searchParams">Search parameters.</param>
         public async Task<object> List(SearchParams searchParams)
         {
             User[] Results = await (from e in db.Users where e.DeletedAt == null where e.Email.Contains(searchParams.Search) select e)
@@ -22,6 +30,10 @@ namespace API.Services
             return new { Total, Results };
         }
 
+        /// <summary>
+        /// Dispose the specified disposing.
+        /// </summary>
+        /// <param name="disposing">If set to <c>true</c> disposing.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing)

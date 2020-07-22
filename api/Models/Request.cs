@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace API.Models
 {
+    /// <summary>
+    /// Search parameters.
+    /// </summary>
     public class SearchParams
     {
         [Range(1, 99999, ErrorMessage = "error.validation.invalid-page")]

@@ -4,6 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace API.Models
 {
+    /// <summary>
+    /// Log.
+    /// </summary>
     public class Log
     {
         [Key]

@@ -3,8 +3,15 @@ using System.Web.Routing;
 
 namespace API
 {
-    public class RouteConfig
+    /// <summary>
+    /// Route config.
+    /// </summary>
+    public static class RouteConfig
     {
+        /// <summary>
+        /// Registers the routes.
+        /// </summary>
+        /// <param name="routes">Routes.</param>
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");

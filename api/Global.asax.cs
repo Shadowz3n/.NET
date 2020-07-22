@@ -9,8 +9,14 @@ using API.Controllers;
 
 namespace API
 {
+    /// <summary>
+    /// Global.
+    /// </summary>
     public class Global : HttpApplication
     {
+        /// <summary>
+        /// Applications the error.
+        /// </summary>
         protected void Application_Error()
         {
             Exception exception = Server.GetLastError();
@@ -49,6 +55,9 @@ namespace API
             }
         }
 
+        /// <summary>
+        /// Applications the start.
+        /// </summary>
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();

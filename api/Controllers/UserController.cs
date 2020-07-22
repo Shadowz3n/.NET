@@ -5,9 +5,29 @@ using API.Models;
 
 namespace API.Controllers
 {
+    /// <summary>
+    /// User controller.
+    /// </summary>
     [Authorize]
     public class UserController : ApiController
     {
+        /// <summary>
+        /// Test this instance.
+        /// </summary>
+        /// <returns>The test.</returns>
+        [HttpGet]
+        [AllowAnonymous]
+        public bool Test()
+        {
+            return true;
+        }
+
+        // GET: api/user/login
+        /// <summary>
+        /// Returns user login response
+        /// </summary>
+        /// <returns>The login.</returns>
+        /// <param name="userLogin">User login.</param>
         [HttpPost]
         [AllowAnonymous]
         [Route("api/user/login")]
@@ -24,6 +44,12 @@ namespace API.Controllers
             return Ok(new { result = userLogin });
         }
 
+        // POST: api/user/register
+        /// <summary>
+        /// Register the specified user.
+        /// </summary>
+        /// <returns>The register.</returns>
+        /// <param name="user">User.</param>
         [HttpPost]
         [AllowAnonymous]
         [Route("api/user/register")]
@@ -40,9 +66,15 @@ namespace API.Controllers
             return Ok(new { result =  user });
         }
 
+        // GET: api/users
+        /// <summary>
+        /// List the specified searchParams.
+        /// </summary>
+        /// <returns>The user list.</returns>
+        /// <param name="searchParams">Search parameters.</param>
         [HttpGet]
-        [AllowAnonymous]
-        [Route("api/user")]
+        [Route("api/users")]
+        [Authorize(Roles = "Admin")]
         public object List([FromUri]SearchParams searchParams)
         {
             if (!ModelState.IsValid)
@@ -56,25 +88,44 @@ namespace API.Controllers
             return Ok(new { result = searchParams });
         }
 
+        // POST: api/user
+        /// <summary>
+        /// Add user in Admin
+        /// </summary>
+        /// <returns>The added user.</returns>
         [HttpPost]
         [Route("api/user")]
+        [Authorize(Roles = "Admin")]
         public object Add()
         {
             return Ok(new { });
         }
 
+        // PUT: api/user
+        /// <summary>
+        /// Edit user in admin.
+        /// </summary>
+        /// <returns>The edited user.</returns>
         [HttpPut]
         [Route("api/user")]
+        [Authorize(Roles = "Admin")]
         public object Edit()
         {
             return Ok(new { });
         }
 
+        // DELETE: api/user/{id:int}
+        /// <summary>
+        /// Delete the specified user id.
+        /// </summary>
+        /// <returns>The id.</returns>
+        /// <param name="id">Identifier.</param>
         [HttpDelete]
-        [Route("api/user")]
-        public object Delete()
+        [Route("api/user/{id:int}")]
+        [Authorize(Roles = "Admin")]
+        public object Delete(int id)
         {
-            return Ok(new { });
+            return Ok(new { id });
         }
     }
 }

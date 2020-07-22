@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace API.Models
 {
+    /// <summary>
+    /// State.
+    /// </summary>
     public class State
     {
         [Key]
