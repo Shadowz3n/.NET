@@ -1,0 +1,12 @@
+[Bb]in/
+[Oo]bj/
+
+*.userprefs
+*.usertasks
+
+*~
+*.pidb
+*.resources
+test-results/
+
+.vs/
