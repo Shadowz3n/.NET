@@ -151,6 +151,10 @@
     <Compile Include="Utils\Helper\HCaptcha.cs" />
     <Compile Include="Models\HCaptcha.cs" />
     <Compile Include="Models\UserRole.cs" />
+    <Compile Include="Services\StateService.cs" />
+    <Compile Include="Controllers\CityController.cs" />
+    <Compile Include="Models\City.cs" />
+    <Compile Include="Services\CityService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />

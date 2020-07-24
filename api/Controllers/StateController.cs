@@ -1,19 +1,27 @@
-﻿using System.Web.Mvc;
+﻿using System.Threading.Tasks;
+using System.Web.Http;
+using API.Models;
+using API.Services;
 
 namespace API.Controllers
 {
     /// <summary>
     /// State controller.
     /// </summary>
-    public class StateController : Controller
+    [Authorize]
+    public class StateController : ApiController
     {
         /// <summary>
-        /// Index this instance.
+        /// List the specified searchParams.
         /// </summary>
-        /// <returns>The index.</returns>
-        public ActionResult Index()
+        /// <returns>The list.</returns>
+        /// <param name="searchParams">Search parameters.</param>
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("api/states")]
+        public async Task<object> List([FromUri]SearchParams searchParams)
         {
-            return View();
+            return Ok(await new StateService().List(searchParams));
         }
     }
 }

@@ -75,9 +75,9 @@ namespace API.Models
         public string Password { get; set; }
 
         [NotMapped]
-        [Compare("Password")]
-        [Required(ErrorMessage = "error.validation.invalid-password")]
-        [RegularExpression(@"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$", ErrorMessage = "error.validation.invalid-password")]
+        [Compare("Password", ErrorMessage = "error.validation.password-compare")]
+        [Required(ErrorMessage = "error.validation.password-compare")]
+        [RegularExpression(@"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$", ErrorMessage = "error.validation.password-compare")]
         public string CheckPassword { get; set; }
 
         [Column("CityID")]

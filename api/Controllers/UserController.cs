@@ -11,18 +11,6 @@ namespace API.Controllers
     [Authorize]
     public class UserController : ApiController
     {
-        /// <summary>
-        /// Test this instance.
-        /// </summary>
-        /// <returns>The test.</returns>
-        [HttpGet]
-        [AllowAnonymous]
-        [Route("api/user/test")]
-        public bool Test()
-        {
-            return true;
-        }
-
         // GET: api/user/login
         /// <summary>
         /// Returns user login response

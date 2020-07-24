@@ -7,7 +7,7 @@ namespace API.Models
     /// <summary>
     /// State.
     /// </summary>
-    public class State
+    public class City
     {
         [Key]
         public int ID { get; set; }
@@ -17,16 +17,16 @@ namespace API.Models
         [Required(ErrorMessage = "error.validation.invalid-name")]
         public string Name { get; set; }
 
-        [Column("UF")]
+        [Column("StateID")]
         [MaxLength(10)]
-        [Required(ErrorMessage = "error.validation.invalid-uf")]
-        public string Uf { get; set; }
+        [Required(ErrorMessage = "error.validation.invalid-state-id")]
+        public int StateID { get; set; }
 
         [DataType(DataType.DateTime, ErrorMessage = "error.validation.invalid-created-at")]
         public DateTime CreatedAt { get; set; }
 
         [DataType(DataType.DateTime, ErrorMessage = "error.validation.invalid-updated-at")]
-        public DateTime UpdatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
 
         [DataType(DataType.DateTime, ErrorMessage = "error.validation.invalid-deleted-at")]
         public DateTime? DeletedAt { get; set; }
