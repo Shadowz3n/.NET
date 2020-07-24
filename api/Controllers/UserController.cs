@@ -11,7 +11,7 @@ namespace API.Controllers
     [Authorize]
     public class UserController : ApiController
     {
-        // GET: api/user/login
+        // POST: api/user/login
         /// <summary>
         /// Returns user login response
         /// </summary>

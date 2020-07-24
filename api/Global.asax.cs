@@ -6,6 +6,7 @@ using System.Web.Http.Cors;
 using System.Web.Mvc;
 using System.Web.Routing;
 using API.Controllers;
+using Swashbuckle.Application;
 
 namespace API
 {
@@ -62,6 +63,7 @@ namespace API
         {
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
+            GlobalConfiguration.Configuration.EnableSwagger(c => c.SingleApiVersion("v1", "API")).EnableSwaggerUi();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             EnableCorsAttribute corsAttr = new EnableCorsAttribute(WebConfigurationManager.AppSettings["CorsHost"], "*", "*", "*");
             GlobalConfiguration.Configuration.EnableCors(corsAttr);

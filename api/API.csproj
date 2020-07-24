@@ -18,7 +18,7 @@
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\API.xml</DocumentationFile>
+    <DocumentationFile>bin\Swagger.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <Optimize>true</Optimize>
@@ -109,6 +109,9 @@
     <Reference Include="Swashbuckle.Core">
       <HintPath>..\packages\Swashbuckle.Core.5.6.0\lib\net40\Swashbuckle.Core.dll</HintPath>
     </Reference>
+    <Reference Include="WebActivatorEx">
+      <HintPath>..\packages\WebActivatorEx.2.0\lib\net40\WebActivatorEx.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\" />
@@ -157,6 +160,7 @@
     <Compile Include="Services\CityService.cs" />
     <Compile Include="Controllers\LogController.cs" />
     <Compile Include="Services\LogService.cs" />
+    <Compile Include="App_Start\SwaggerConfig.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />
