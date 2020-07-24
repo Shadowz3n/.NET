@@ -14,18 +14,15 @@ namespace API.Models
         public int ID { get; set; }
 
         [Column("Action")]
-        [Required(ErrorMessage = "error.validation.invalid-action")]
         public string Action { get; set; }
 
         [Column("UserID")]
         public int? UserID { get; set; }
 
         [Column("IP")]
-        [Required(ErrorMessage = "error.validation.invalid-ip")]
         public string Ip { get; set; }
 
         [Column("CreatedAt")]
-        [DataType(DataType.DateTime, ErrorMessage = "error.validation.invalid-created-at")]
         public DateTime CreatedAt { get; set; }
     }
 }

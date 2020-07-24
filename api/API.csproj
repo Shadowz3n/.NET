@@ -155,6 +155,8 @@
     <Compile Include="Controllers\CityController.cs" />
     <Compile Include="Models\City.cs" />
     <Compile Include="Services\CityService.cs" />
+    <Compile Include="Controllers\LogController.cs" />
+    <Compile Include="Services\LogService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />

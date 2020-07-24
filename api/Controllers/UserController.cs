@@ -69,11 +69,6 @@ namespace API.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.Values.SelectMany(start => start.Errors).Select(error => error.ErrorMessage).Take(1).ElementAt(0));
 
-            if (WebConfigurationManager.AppSettings["GoogleRecaptcha"] == "true")
-            {
-
-            }
-
             return Ok(new { result = searchParams });
         }
 

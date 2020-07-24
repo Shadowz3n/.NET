@@ -23,6 +23,7 @@ namespace API.DAL
         public DbSet<User> Users { get; set; }
         public DbSet<State> States { get; set; }
         public DbSet<City> Cities { get; set; }
+        public DbSet<Log> Logs { get; set; }
 
         /// <summary>
         /// Ons the model creating.
