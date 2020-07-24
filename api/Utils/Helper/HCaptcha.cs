@@ -1,31 +1,24 @@
 ﻿using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
-using API.Services;
-using API.Models;
+using System.Web.Configuration;
 
 namespace API.Utils.Helper
 {
-
-    public class HCaptcha : BaseService
+    public class HCaptcha
     {
-        private readonly string _secretKey;
+        static HttpClient client = new HttpClient();
 
-        public HCaptcha(string url, string secretKey) : base(url)
-        {
-            _secretKey = secretKey;
-        }
-
-        public async Task<HCaptchaResponse> ValidateFromGoogle(string token)
+        public async Task<HttpResponseMessage> ValidateHCaptcha(string token)
         {
 
             var content = new FormUrlEncodedContent(new[]
             {
-                new KeyValuePair<string, string>("secret", _secretKey),
+                new KeyValuePair<string, string>("secret", WebConfigurationManager.AppSettings["HCaptchaTokenApi"]),
                 new KeyValuePair<string, string>("response", token)
             });
 
-            return await PostAsync<HCaptchaResponse>("", content);
+            return await client.PostAsync(WebConfigurationManager.AppSettings["HCaptchaUrlApi"], content);
         }
     }
 }

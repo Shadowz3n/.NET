@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using API.Utils.Validation;
 
 namespace API.Models
 {
@@ -13,24 +14,25 @@ namespace API.Models
         public int ID { get; set; }
 
         [Column("Name")]
-        [MaxLength(255)]
-        [Required(ErrorMessage = "error.validation.invalid-name")]
+        [StringLength(255, MinimumLength = 3, ErrorMessage = "error.validation.invalid-name")]
         public string Name { get; set; }
 
         [Required]
         [MaxLength(255)]
         [Column("Email")]
-        [DataType(DataType.EmailAddress, ErrorMessage = "error.validation.incorrect-email")]
+        [EmailAddress(ErrorMessage = "error.validation.incorrect-email")]
         public string Email { get; set; }
 
         [Required]
         [MaxLength(255)]
         [Column("Password")]
+        [RegularExpression(@"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$", ErrorMessage = "error.validation.invalid-password")]
         public string Password { get; set; }
 
         [Required]
         [MaxLength(20)]
         [Column("CPF")]
+        [CpfValidation(ErrorMessage = "")]
         public string Cpf { get; set; }
 
         [Required]
@@ -64,17 +66,33 @@ namespace API.Models
 
         [Column("Email")]
         [Required(ErrorMessage = "error.validation.invalid-email")]
+        [EmailAddress(ErrorMessage = "error.validation.incorrect-email")]
         public string Email { get; set; }
 
         [Column("Password")]
         [Required(ErrorMessage = "error.validation.invalid-password")]
+        [RegularExpression(@"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$", ErrorMessage = "error.validation.invalid-password")]
         public string Password { get; set; }
+
+        [NotMapped]
+        [Compare("Password")]
+        [Required(ErrorMessage = "error.validation.invalid-password")]
+        [RegularExpression(@"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$", ErrorMessage = "error.validation.invalid-password")]
         public string CheckPassword { get; set; }
+
+        [Column("CityID")]
         public int CityID { get; set; }
+
+        [Column("StateID")]
         public int StateID { get; set; }
+
+        [Column("CPF")]
         public string Cpf { get; set; }
+
+        [Column("CNPJ")]
         public string Cnpj { get; set; }
 
+        [Column("Phone")]
         [Required(ErrorMessage = "error.validation.invalid-phone")]
         public string Phone { get; set; }
 
@@ -82,8 +100,10 @@ namespace API.Models
         [Required(ErrorMessage = "error.validation.invalid-token")]
         public string Token { get; set; }
 
+        [Column("RoleID")]
         public int RoleID { get; set; }
 
+        [Column("CreatedAt")]
         [DataType(DataType.DateTime, ErrorMessage = "error.validation.invalid-created-at")]
         public DateTime CreatedAt { get; set; }
     }
@@ -94,29 +114,17 @@ namespace API.Models
     public class UserLogin
     {
         [Required]
+        [EmailAddress(ErrorMessage = "error.validation.incorrect-email")]
         [MaxLength(255, ErrorMessage = "error.validation.incorrect-email")]
-        [DataType(DataType.EmailAddress, ErrorMessage = "error.validation.incorrect-email")]
         public string Email { get; set; }
 
         [Required]
         [MaxLength(255, ErrorMessage = "error.validation.invalid-password")]
+        [RegularExpression(@"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$", ErrorMessage = "error.validation.invalid-password")]
         public string Password { get; set; }
 
         [NotMapped]
         [Required(ErrorMessage = "error.validation.invalid-token")]
         public string UToken { get; set; }
-    }
-
-    /// <summary>
-    /// User roles.
-    /// </summary>
-    public class UserRoles
-    {
-        public int ID { get; set; }
-
-        [Required]
-        [Column("Role")]
-        [MaxLength(255)]
-        public string Role { get; set; }
     }
 }

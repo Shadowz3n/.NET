@@ -143,16 +143,14 @@
     <Compile Include="Filters\TokenManager.cs" />
     <Compile Include="Utils\Validation\CnpjValidation.cs" />
     <Compile Include="Utils\Validation\CpfValidation.cs" />
-    <Compile Include="Utils\Validation\EmailValidation.cs" />
-    <Compile Include="Utils\Validation\PasswordValidation.cs" />
     <Compile Include="Utils\Helper\Session.cs" />
     <Compile Include="Utils\Helper\Constants.cs" />
     <Compile Include="Models\WhiteList.cs" />
     <Compile Include="Utils\Helper\GoogleRecaptcha.cs" />
-    <Compile Include="Services\BaseService.cs" />
     <Compile Include="Models\Google.cs" />
     <Compile Include="Utils\Helper\HCaptcha.cs" />
     <Compile Include="Models\HCaptcha.cs" />
+    <Compile Include="Models\UserRole.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />

@@ -1,31 +1,24 @@
 ﻿using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
-using API.Services;
-using API.Models;
+using System.Web.Configuration;
 
 namespace API.Utils.Helper
 {
-
-    public class GoogleRecaptcha : BaseService
+    public class Google
     {
-        private readonly string _secretKey;
+        static HttpClient client = new HttpClient();
 
-        public GoogleRecaptcha(string url, string secretKey) : base(url)
-        {
-            _secretKey = secretKey;
-        }
-
-        public async Task<GoogleResponse> ValidateFromGoogle(string token)
+        public async Task<HttpResponseMessage> ValidateRecaptcha(string token)
         {
 
             var content = new FormUrlEncodedContent(new[]
             {
-                new KeyValuePair<string, string>("secret", _secretKey),
+                new KeyValuePair<string, string>("secret", WebConfigurationManager.AppSettings["HCaptchaTokenApi"]),
                 new KeyValuePair<string, string>("response", token)
             });
 
-            return await PostAsync<GoogleResponse>("", content);
+            return await client.PostAsync(WebConfigurationManager.AppSettings["HCaptchaUrlApi"], content);
         }
     }
 }
