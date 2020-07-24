@@ -32,7 +32,7 @@ namespace API.Models
         [Required]
         [MaxLength(20)]
         [Column("CPF")]
-        [CpfValidation(ErrorMessage = "")]
+        [CpfValidation(ErrorMessage = "error.validation.invalid-cpf")]
         public string Cpf { get; set; }
 
         [Required]
@@ -87,6 +87,7 @@ namespace API.Models
         public int StateID { get; set; }
 
         [Column("CPF")]
+        [CpfValidation(ErrorMessage = "error.validation.invalid-cpf")]
         public string Cpf { get; set; }
 
         [Column("CNPJ")]
