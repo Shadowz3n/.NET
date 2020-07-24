@@ -15,8 +15,9 @@ namespace API.Controllers
         /// <summary>
         /// Returns user login response
         /// </summary>
-        /// <returns>The login.</returns>
+        /// <returns>The login response.</returns>
         /// <param name="userLogin">User login.</param>
+        /// <response code="200">{ tokenType: string, accessToken: string }</response>
         [HttpPost]
         [AllowAnonymous]
         [Route("api/user/login")]

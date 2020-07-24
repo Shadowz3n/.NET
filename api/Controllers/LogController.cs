@@ -6,7 +6,7 @@ using API.Services;
 namespace API.Controllers
 {
     /// <summary>
-    /// State controller.
+    /// Log controller.
     /// </summary>
     [Authorize]
     public class LogController : ApiController
