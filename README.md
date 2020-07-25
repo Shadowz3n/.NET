@@ -21,7 +21,7 @@
 
 | Name | Description |
 | ------ | ------ |
-| <connectionStrings> | Set your database connection |
+| connectionStrings | Set your database connection here |
 | GoogleRecaptcha | [true/false] Enable Google Recaptcha (Login / Register) |
 | GoogleRecaptchaUrlApi | Google Recaptcha verify endpoint |
 | GoogleRecaptchaTokenApi | Google Recaptcha back-end secret |
