@@ -32,8 +32,8 @@ namespace API.Utils.Helper
         {
             List<object> returnResponse = new List<object>();
             MimeMessage message = new MimeMessage();
-            message.From.Add(new MailboxAddress(_mailFrom));
-            message.To.Add(new MailboxAddress(sendTo.Trim()));
+            message.From.Add(new MailboxAddress(_mailFrom, _mailFrom));
+            message.To.Add(new MailboxAddress(sendTo.Trim(), sendTo.Trim()));
             message.Subject = title;
             message.Body = new TextPart("html") { Text = html };
 
@@ -42,7 +42,7 @@ namespace API.Utils.Helper
             {
                 foreach (string reply in replyTo)
                 {
-                    message.ResentBcc.Add(new MailboxAddress(reply.Trim()));
+                    message.ResentBcc.Add(new MailboxAddress(reply.Trim(), reply.Trim()));
                 }
             }
 
