@@ -165,6 +165,8 @@
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="Utils\Helper\HashPassword.cs" />
     <Compile Include="Utils\Helper\TokenManager.cs" />
+    <Compile Include="Utils\Helper\LogHelper.cs" />
+    <Compile Include="Utils\Helper\Ip.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />

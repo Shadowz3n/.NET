@@ -16,10 +16,6 @@ namespace API.DAL
         {
         }
 
-        /// <summary>
-        /// Gets or sets the users.
-        /// </summary>
-        /// <value>The users.</value>
         public DbSet<User> Users { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
         public DbSet<State> States { get; set; }
