@@ -49,7 +49,6 @@ namespace API.Controllers
             }
 
             object user = await new UserService().Auth(userLogin);
-
             if (user == null)
                 return BadRequest("error.validation.incorrect-login");
 
@@ -62,10 +61,11 @@ namespace API.Controllers
         /// </summary>
         /// <returns>The register.</returns>
         /// <param name="user">User.</param>
+        /// <response code="200">{ tokenType: string, accessToken: string }</response>
         [HttpPost]
         [AllowAnonymous]
         [Route("api/user/register")]
-        public async Task<object> Register([FromBody]User user)
+        public async Task<object> Register([FromBody]UserRegister userRegister)
         {
             if(!ModelState.IsValid)
                 return BadRequest(ModelState.Values.SelectMany(start => start.Errors).Select(error => error.ErrorMessage).Take(1).ElementAt(0));
@@ -73,7 +73,7 @@ namespace API.Controllers
             // Google Recaptcha Validation
             if (WebConfigurationManager.AppSettings["GoogleRecaptcha"] == "true")
             {
-                GoogleResponse googleResponse = await _google.ValidateRecaptcha<GoogleResponse>(user.Token);
+                GoogleResponse googleResponse = await _google.ValidateRecaptcha<GoogleResponse>(userRegister.Token);
                 if (!googleResponse.Success)
                     return BadRequest("error.validation.invalid-recaptcha");
             }
@@ -81,12 +81,20 @@ namespace API.Controllers
             // HCaptcha Validation
             if (WebConfigurationManager.AppSettings["HCaptcha"] == "true")
             {
-                HCaptchaResponse hCaptchaResponse = await _hCaptcha.Validate<HCaptchaResponse>(user.Token);
+                HCaptchaResponse hCaptchaResponse = await _hCaptcha.Validate<HCaptchaResponse>(userRegister.Token);
                 if (!hCaptchaResponse.Success)
                     return BadRequest("error.validation.invalid-hcaptcha");
             }
 
-            return Ok(new { result =  user });
+            UserRegisterResponse user = await new UserService().Register(userRegister);
+
+            if (user.ErrorEmail)
+                return BadRequest("error.user.email-exists");
+
+            if (user.ErrorCpf)
+                return BadRequest("error.user.cpf-exists");
+
+            return Ok(user);
         }
 
         // GET: api/users

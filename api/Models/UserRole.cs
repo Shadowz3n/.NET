@@ -22,7 +22,7 @@ namespace API.Models
 
         [Column("UpdatedAt")]
         [DataType(DataType.DateTime, ErrorMessage = "error.validation.invalid-updated-at")]
-        public DateTime UpdatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
 
         [Column("DeletedAt")]
         [DataType(DataType.DateTime, ErrorMessage = "error.validation.invalid-deleted-at")]

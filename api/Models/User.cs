@@ -17,6 +17,10 @@ namespace API.Models
         [StringLength(255, MinimumLength = 3, ErrorMessage = "error.validation.invalid-name")]
         public string Name { get; set; }
 
+        [Column("Lastname")]
+        [StringLength(255, MinimumLength = 3, ErrorMessage = "error.validation.invalid-lastname")]
+        public string Lastname { get; set; }
+
         [Required]
         [MaxLength(255)]
         [Column("Email")]
@@ -29,15 +33,27 @@ namespace API.Models
         [RegularExpression(@"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$", ErrorMessage = "error.validation.invalid-password")]
         public string Password { get; set; }
 
+        [Column("CityID")]
+        [Range(1, 9999999, ErrorMessage = "error.validation.invalid-city-id")]
+        public int CityID { get; set; }
+
+        [Column("StateID")]
+        [Range(1, 9999999, ErrorMessage = "error.validation.invalid-state-id")]
+        public int StateID { get; set; }
+
         [Required]
         [MaxLength(20)]
         [Column("CPF")]
         [CpfValidation(ErrorMessage = "error.validation.invalid-cpf")]
         public string Cpf { get; set; }
 
+        [Column("CNPJ")]
+        [CnpjValidation(ErrorMessage = "error.validation.invalid-cnpj")]
+        public string Cnpj { get; set; }
+
         [Required]
         [Column("RoleID")]
-        [Range(1, 9999, ErrorMessage = "error.validation.invalid-role-id")]
+        [Range(1, 9999999, ErrorMessage = "error.validation.invalid-role-id")]
         public int RoleID { get; set; }
 
         [NotMapped]
@@ -54,7 +70,7 @@ namespace API.Models
 
         [Column("UpdatedAt")]
         [DataType(DataType.DateTime, ErrorMessage = "error.validation.invalid-updated-at")]
-        public DateTime UpdatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
 
         [Column("DeletedAt")]
         [DataType(DataType.DateTime, ErrorMessage = "error.validation.invalid-deleted-at")]
@@ -64,7 +80,11 @@ namespace API.Models
     public class UserRegister
     {
         [Column("Name")]
+        [StringLength(255, MinimumLength = 3, ErrorMessage = "error.validation.invalid-name")]
         public string Name { get; set; }
+
+        [Column("Lastname")]
+        [StringLength(255, MinimumLength = 3, ErrorMessage = "error.validation.invalid-lastname")]
         public string Lastname { get; set; }
 
         [Column("Email")]
@@ -84,9 +104,11 @@ namespace API.Models
         public string CheckPassword { get; set; }
 
         [Column("CityID")]
+        [Range(1, 9999999, ErrorMessage = "error.validation.invalid-city-id")]
         public int CityID { get; set; }
 
         [Column("StateID")]
+        [Range(1, 9999999, ErrorMessage = "error.validation.invalid-state-id")]
         public int StateID { get; set; }
 
         [Column("CPF")]
@@ -94,6 +116,7 @@ namespace API.Models
         public string Cpf { get; set; }
 
         [Column("CNPJ")]
+        [CnpjValidation(ErrorMessage = "error.validation.invalid-cnpj")]
         public string Cnpj { get; set; }
 
         [Column("Phone")]
@@ -106,10 +129,17 @@ namespace API.Models
 
         [Column("RoleID")]
         public int RoleID { get; set; }
+    }
 
-        [Column("CreatedAt")]
-        [DataType(DataType.DateTime, ErrorMessage = "error.validation.invalid-created-at")]
-        public DateTime CreatedAt { get; set; }
+    /// <summary>
+    /// User register response.
+    /// </summary>
+    public class UserRegisterResponse
+    {
+        public string TokenType { get; set; }
+        public string AccessToken { get; set; }
+        public bool ErrorEmail { get; set; }
+        public bool ErrorCpf { get; set; }
     }
 
     /// <summary>
