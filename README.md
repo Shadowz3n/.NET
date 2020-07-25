@@ -8,3 +8,4 @@
 * Google Recaptcha
 * HCaptcha
 * Custom Data Annotations
+* Logs
