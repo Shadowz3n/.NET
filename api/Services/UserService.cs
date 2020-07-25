@@ -73,7 +73,7 @@ namespace API.Services
                 UserID = user.FirstOrDefault().ID,
                 Action = "user.login"
             };
-            await new LogHelper().Save(log);
+            await new LogService().Save(log);
 
             return new { tokenType, accessToken };
         }

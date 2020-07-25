@@ -1,9 +1,11 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Linq.Dynamic;
 using System.Threading.Tasks;
 using API.DAL;
 using API.Models;
+using API.Utils.Helper;
 
 namespace API.Services
 {
@@ -28,6 +30,26 @@ namespace API.Services
 
             int Total = await (from e in db.States where e.DeletedAt == null select e).CountAsync();
             return new { Total, Results };
+        }
+
+        /// <summary>
+        /// Save the specified log.
+        /// </summary>
+        /// <returns>The save.</returns>
+        /// <param name="log">Log.</param>
+        public async Task<object> Save(Log log)
+        {
+            /* Save to log */
+            Log logObj = new Log
+            {
+                Action = log.Action,
+                UserID = log.UserID,
+                Ip = new Ip().GetIPAddress(),
+                CreatedAt = DateTime.Now,
+            };
+
+            db.Logs.Add(logObj);
+            return await db.SaveChangesAsync();
         }
 
         /// <summary>
