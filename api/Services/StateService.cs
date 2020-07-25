@@ -1,6 +1,8 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Linq.Dynamic;
+using System.Threading;
 using System.Threading.Tasks;
 using API.DAL;
 using API.Models;
@@ -28,6 +30,56 @@ namespace API.Services
 
             int Total = await (from e in db.States where e.DeletedAt == null select e).CountAsync();
             return new { Total, Results };
+        }
+
+        /// <summary>
+        /// Add the specified state.
+        /// </summary>
+        /// <returns>The add.</returns>
+        /// <param name="state">State.</param>
+        public async Task<object> AddAndEdit(State state)
+        {
+            db.States.Add(state);
+            await db.SaveChangesAsync();
+
+            // Save Log
+            int userId = int.Parse(Thread.CurrentPrincipal.Identity.Name);
+
+            int id = int.TryParse(state.ID.ToString(), out id) ? id : 0;
+            string action = id == 0 ? "user.add.state" : "user.edit.state";
+
+            Log log = new Log
+            {
+                UserID = userId,
+                Action = action
+            };
+            await new LogService().Save(log);
+
+            return state.ID;
+        }
+
+        public async Task<object> Delete(int id)
+        {
+            // Check if user id exists
+            State[] state = await (from s in db.States
+                                 where s.ID == id
+                                 select s).Take(1).ToArrayAsync();
+
+            if (!state.Any())
+                return false;
+
+            // Save Log
+            int userId = int.Parse(Thread.CurrentPrincipal.Identity.Name);
+            Log log = new Log
+            {
+                UserID = userId,
+                Action = "user.delete.state"
+            };
+            await new LogService().Save(log);
+
+            state.FirstOrDefault().DeletedAt = DateTime.Now;
+            await db.SaveChangesAsync();
+            return true;
         }
 
         /// <summary>

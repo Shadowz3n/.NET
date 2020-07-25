@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Http;
 using API.Models;
 using API.Services;
@@ -24,6 +25,36 @@ namespace API.Controllers
         public async Task<object> List([FromUri]SearchParams searchParams)
         {
             return Ok(await _stateService.List(searchParams));
+        }
+
+        /// <summary>
+        /// Add the specified state.
+        /// </summary>
+        /// <returns>The add.</returns>
+        /// <param name="state">State.</param>
+        [HttpPost]
+        [HttpPut]
+        [Authorize(Roles = "Admin")]
+        [Route("api/state")]
+        public async Task<object> Add([FromBody]State state)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState.Values.SelectMany(start => start.Errors).Select(error => error.ErrorMessage).Take(1).ElementAt(0));
+
+            return Ok(await _stateService.AddAndEdit(state));
+        }
+
+        /// <summary>
+        /// Delete the specified id.
+        /// </summary>
+        /// <returns>The delete.</returns>
+        /// <param name="id">Identifier.</param>
+        [HttpDelete]
+        [Authorize(Roles = "Admin")]
+        [Route("api/state")]
+        public async Task<object> Delete([FromBody]int id)
+        {
+            return Ok(await _stateService.Delete(id));
         }
     }
 }

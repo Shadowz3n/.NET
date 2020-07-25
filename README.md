@@ -14,7 +14,7 @@
 
 * Logs - List / Add
 * User - List / Login / Register / Add / Edit / Delete
-* State - List
+* State - List / Add / Edit / Delete
 * City - List
 
 ## Swagger
