@@ -9,4 +9,4 @@
 * HCaptcha
 * Custom Data Annotations
 * Logs
-* User - Login / Register / Add / Delete
+* User - Login / Register / Add / Edit / Delete

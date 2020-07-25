@@ -152,10 +152,25 @@ namespace API.Models
         public bool ErrorCpf { get; set; }
     }
 
+    /// <summary>
+    /// User add response.
+    /// </summary>
     public class UserAddResponse
     {
         public string TokenType { get; set; }
         public string AccessToken { get; set; }
+        public bool ErrorEmail { get; set; }
+        public bool ErrorCpf { get; set; }
+    }
+
+    /// <summary>
+    /// User edit response.
+    /// </summary>
+    public class UserEditResponse
+    {
+        public string TokenType { get; set; }
+        public string AccessToken { get; set; }
+        public bool ErrorId { get; set; }
         public bool ErrorEmail { get; set; }
         public bool ErrorCpf { get; set; }
     }

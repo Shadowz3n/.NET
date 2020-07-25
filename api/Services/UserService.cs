@@ -161,7 +161,7 @@ namespace API.Services
         /// <param name="user">User.</param>
         public async Task<UserAddResponse> Add(User user)
         {
-            // Register response
+            // Add response
             UserAddResponse userAddResponse = new UserAddResponse();
 
             // Check if user email exists
@@ -207,6 +207,66 @@ namespace API.Services
             userAddResponse.AccessToken = _tokenManager.Generate(claims);
 
             return userAddResponse;
+        }
+
+        public async Task<UserEditResponse> Edit(User user)
+        {
+            // Edit response
+            UserEditResponse userEditResponse = new UserEditResponse();
+
+            // Check ID
+            int id = int.TryParse(user.ID.ToString(), out id) ? id : 0;
+            if(id == 0)
+            {
+                userEditResponse.ErrorId = true;
+                return userEditResponse;
+            }
+
+            // Check if user email exists
+            User[] checkUserEmail = await (from u in db.Users
+                                           where u.Email == user.Email
+                                           where u.ID != user.ID
+                                           select u).Take(1).ToArrayAsync();
+
+            if (checkUserEmail.Any())
+            {
+                userEditResponse.ErrorEmail = true;
+                return userEditResponse;
+            }
+
+            // Check if user cpf exists
+            User[] checkUserCpf = await (from u in db.Users
+                                         where u.Cpf == user.Cpf
+                                         where u.ID != user.ID
+                                         select u).Take(1).ToArrayAsync();
+
+            if (checkUserCpf.Any())
+            {
+                userEditResponse.ErrorCpf = true;
+                return userEditResponse;
+            }
+
+            user.Password = new HashPassword().Generate(user.Password);
+            db.Users.Add(user);
+
+            // Save Log
+            Log log = new Log
+            {
+                UserID = user.ID,
+                Action = "user.edit"
+            };
+            await new LogService().Save(log);
+
+            Claim[] claims = {
+                new Claim(ClaimTypes.Name, user.Name),
+                new Claim(ClaimTypes.Email, user.Email),
+                new Claim(ClaimTypes.Role, user.Role)
+            };
+
+            userEditResponse.TokenType = "Bearer";
+            userEditResponse.AccessToken = _tokenManager.Generate(claims);
+
+            return userEditResponse;
         }
 
         /// <summary>

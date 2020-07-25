@@ -146,12 +146,20 @@ namespace API.Controllers
         [HttpPut]
         [Route("api/user")]
         [Authorize(Roles = "Admin")]
-        public object Edit([FromBody]User user)
+        public async Task<object> Edit([FromBody]User user)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.Values.SelectMany(start => start.Errors).Select(error => error.ErrorMessage).Take(1).ElementAt(0));
 
-            return Ok(new { });
+            UserEditResponse editUser = await new UserService().Edit(user);
+
+            if (editUser.ErrorEmail)
+                return BadRequest("error.user.email-exists");
+
+            if (editUser.ErrorCpf)
+                return BadRequest("error.user.cpf-exists");
+
+            return Ok(editUser);
         }
 
         // DELETE: api/user/{id:int}
