@@ -138,6 +138,7 @@
     <Folder Include="Filters\" />
     <Folder Include="Utils\Validation\" />
     <Folder Include="Utils\Helper\" />
+    <Folder Include="Views\MailTemplates\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\HomeController.cs" />
@@ -191,6 +192,7 @@
     <Content Include="Global.asax" />
     <Content Include="packages.config" />
     <Content Include="Views\Restricted\Index.cshtml" />
+    <Content Include="Views\MailTemplates\Register.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

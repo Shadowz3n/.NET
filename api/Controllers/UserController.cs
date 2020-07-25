@@ -94,6 +94,10 @@ namespace API.Controllers
             if (user.ErrorCpf)
                 return BadRequest("error.user.cpf-exists");
 
+            // Register Mail
+            string message = RenderRazor.RenderView("~/Views/UserMailer/RememberPass.cshtml", userRegister, null);
+            MailService.SendMailAsync(userRegister.Email, new string[] { }, "Register", message);
+
             return Ok(user);
         }
 
