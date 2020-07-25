@@ -17,6 +17,11 @@
 * State - List
 * City - List
 
+## Swagger
+
+* [Documentation](https://github.com/domaindrivendev/Swashbuckle.AspNetCore)
+* [Localhost URL](http://127.0.0.1:8080/swagger/ui/index)
+
 ## Setup settings `./api/Web.config`
 
 | Name | Value | Description |
