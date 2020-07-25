@@ -2,9 +2,15 @@
 
 namespace API.Controllers
 {
+    /// <summary>
+    /// Error controller.
+    /// </summary>
     public class ErrorController : Controller
     {
-        /* View Renderer Error Controller */
+        /// <summary>
+        /// Index this instance.
+        /// </summary>
+        /// <returns>The index.</returns>
         public ActionResult Index()
         {
             return null;

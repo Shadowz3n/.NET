@@ -11,6 +11,15 @@ namespace API.Utils.Helper
     /// </summary>
     public class MailService
     {
+        private readonly static string _mailFrom = WebConfigurationManager.AppSettings["MailFrom"].Trim();
+        private readonly static string _mailServer = WebConfigurationManager.AppSettings["MailServer"].Trim();
+        private readonly static string _mailUser = WebConfigurationManager.AppSettings["MailUser"].Trim();
+        private readonly static string _mailPass = WebConfigurationManager.AppSettings["MailPass"].Trim();
+        private readonly static string _mailPort = WebConfigurationManager.AppSettings["MailPort"].Trim();
+        private readonly static SecureSocketOptions _mailSsl = WebConfigurationManager.AppSettings["MailSsl"] == "true" ? 
+                                                                SecureSocketOptions.SslOnConnect 
+                                                                : SecureSocketOptions.StartTls;
+
         /// <summary>
         /// Sends the mail async.
         /// </summary>
@@ -23,7 +32,7 @@ namespace API.Utils.Helper
         {
             List<object> returnResponse = new List<object>();
             MimeMessage message = new MimeMessage();
-            message.From.Add(new MailboxAddress(WebConfigurationManager.AppSettings["MailFrom"].Trim()));
+            message.From.Add(new MailboxAddress(_mailFrom));
             message.To.Add(new MailboxAddress(sendTo.Trim()));
             message.Subject = title;
             message.Body = new TextPart("html") { Text = html };
@@ -41,10 +50,9 @@ namespace API.Utils.Helper
             {
                 using (SmtpClient client = new SmtpClient())
                 {
-                    int mailPort = int.TryParse(WebConfigurationManager.AppSettings["MailPort"], out mailPort) ? mailPort : 0;
-                    SecureSocketOptions emailSecurity = WebConfigurationManager.AppSettings["MailSsl"] == "true" ? SecureSocketOptions.SslOnConnect : SecureSocketOptions.StartTls;
-                    client.Connect(WebConfigurationManager.AppSettings["MailServer"], mailPort, false);
-                    client.Authenticate(WebConfigurationManager.AppSettings["MailUser"], WebConfigurationManager.AppSettings["MailPass"]);
+                    int mailPort = int.TryParse(_mailPort, out mailPort) ? mailPort : 0;
+                    client.Connect(_mailServer, mailPort, false);
+                    client.Authenticate(_mailUser, _mailPass);
                     client.Send(message);
                     client.Disconnect(true);
                     return true;

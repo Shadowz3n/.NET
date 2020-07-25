@@ -58,11 +58,10 @@ namespace API.Controllers
 
         // POST: api/user/register
         /// <summary>
-        /// Register the specified user.
+        /// Register the specified userRegister.
         /// </summary>
         /// <returns>The register.</returns>
-        /// <param name="user">User.</param>
-        /// <response code="200">{ tokenType: string, accessToken: string }</response>
+        /// <param name="userRegister">User register.</param>
         [HttpPost]
         [AllowAnonymous]
         [Route("api/user/register")]

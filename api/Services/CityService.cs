@@ -30,6 +30,11 @@ namespace API.Services
             return new { Total, Results };
         }
 
+        /// <summary>
+        /// Bies the state identifier.
+        /// </summary>
+        /// <returns>The state identifier.</returns>
+        /// <param name="stateId">State identifier.</param>
         public async Task<object> ByStateId(int stateId)
         {
             City[] Results = await (from e in db.Cities where e.DeletedAt == null where e.StateID == stateId select e).ToArrayAsync();

@@ -6,8 +6,14 @@ using Swashbuckle.Application;
 
 namespace API.App_Start
 {
+    /// <summary>
+    /// Swagger config.
+    /// </summary>
     public class SwaggerConfig
     {
+        /// <summary>
+        /// Register this instance.
+        /// </summary>
         public static void Register()
         {
             GlobalConfiguration.Configuration

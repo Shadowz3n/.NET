@@ -1,7 +1,14 @@
 ﻿namespace API.Utils.Helper
 {
+    /// <summary>
+    /// Ip.
+    /// </summary>
     public class Ip
     {
+        /// <summary>
+        /// Gets the IPA ddress.
+        /// </summary>
+        /// <returns>The IPA ddress.</returns>
         public string GetIPAddress()
         {
             System.Web.HttpContext context = System.Web.HttpContext.Current;

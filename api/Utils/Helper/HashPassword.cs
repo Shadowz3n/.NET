@@ -11,6 +11,11 @@ namespace API.Utils.Helper
     {
         private static string _salt = WebConfigurationManager.AppSettings["HashSalt"];
 
+        /// <summary>
+        /// Generate the specified password.
+        /// </summary>
+        /// <returns>The generate.</returns>
+        /// <param name="password">Password.</param>
         public string Generate(string password)
         {
             string crypt = ComputeSha256Hash(_salt + ComputeSha256Hash(_salt + ComputeSha256Hash(password + _salt))).ToLower();
