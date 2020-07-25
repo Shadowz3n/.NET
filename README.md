@@ -25,7 +25,7 @@
 ## SQL Server
 
 ```console
-user@host:~$ docker pull mcr.microsoft.com/mssql/server
+user@host:~$ docker pull mcr.microsoft.com/mssql/server:2019-GA-ubuntu-16.04
 user@host:~$ docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=123@456@789aA' -e 'ACCEPT_EULA=Y' -p 1433:1433 --name 'SQLServer' -e "MSSQL_DATA_DIR=/data" -v sqlvolume:/data -d mcr.microsoft.com/mssql/server:2019-GA-ubuntu-16.04
 ```
 
