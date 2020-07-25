@@ -115,6 +115,17 @@
     <Reference Include="System.Web.Helpers.Crypto">
       <HintPath>..\packages\System.Web.Helpers.Crypto.3.2.3\lib\net40\System.Web.Helpers.Crypto.dll</HintPath>
     </Reference>
+    <Reference Include="BouncyCastle.Crypto">
+      <HintPath>..\packages\Portable.BouncyCastle.1.8.5\lib\net40\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="MimeKit">
+      <HintPath>..\packages\MimeKit.2.9.1\lib\net45\MimeKit.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Security" />
+    <Reference Include="MailKit">
+      <HintPath>..\packages\MailKit.2.8.0\lib\net45\MailKit.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\" />
@@ -166,6 +177,7 @@
     <Compile Include="Utils\Helper\HashPassword.cs" />
     <Compile Include="Utils\Helper\TokenManager.cs" />
     <Compile Include="Utils\Helper\Ip.cs" />
+    <Compile Include="Utils\Helper\MailService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />
