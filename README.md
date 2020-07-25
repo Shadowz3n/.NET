@@ -9,5 +9,10 @@
 * Google Recaptcha
 * HCaptcha
 * Custom Data Annotations
-* Logs
-* User - Login / Register / Add / Edit / Delete
+
+## Services
+
+* Logs - List / Add
+* User - List / Login / Register / Add / Edit / Delete
+* State - List
+* City - List
