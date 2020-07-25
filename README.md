@@ -20,6 +20,8 @@
 
 ## Setup
 
+* Change "connectionStrings" in ./Web.config
+
 * Change "appSettings" in ./Web.config
 	* GoogleRecaptcha (true/false): Enable Google Recaptcha (Login / Register)
 		* GoogleRecaptchaUrlApi: Google Recaptcha verify endpoint
