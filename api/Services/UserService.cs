@@ -164,25 +164,20 @@ namespace API.Services
             // Add response
             UserAddResponse userAddResponse = new UserAddResponse();
 
-            // Check if user email exists
-            User[] checkUserEmail = await (from u in db.Users
-                                          where u.Email == user.Email
-                                          select u).Take(1).ToArrayAsync();
+            // Check if user email or cpf exists
+            User[] checkUser = await (from u in db.Users
+                                      where (u.Email == user.Email || u.Cpf == user.Cpf)
+                                      where u.ID != user.ID
+                                      select u).Take(1).ToArrayAsync();
 
-            if (checkUserEmail.Any())
+            if (checkUser.Any())
             {
-                userAddResponse.ErrorEmail = true;
-                return userAddResponse;
-            }
+                if (checkUser.FirstOrDefault().Email == user.Email)
+                    userAddResponse.ErrorEmail = true;
 
-            // Check if user cpf exists
-            User[] checkUserCpf = await (from u in db.Users
-                                        where u.Cpf == user.Cpf
-                                        select u).Take(1).ToArrayAsync();
+                if (checkUser.FirstOrDefault().Cpf == user.Cpf)
+                    userAddResponse.ErrorCpf = true;
 
-            if (checkUserCpf.Any())
-            {
-                userAddResponse.ErrorCpf = true;
                 return userAddResponse;
             }
 
@@ -228,27 +223,20 @@ namespace API.Services
                 return userEditResponse;
             }
 
-            // Check if user email exists
-            User[] checkUserEmail = await (from u in db.Users
-                                           where u.Email == user.Email
-                                           where u.ID != user.ID
-                                           select u).Take(1).ToArrayAsync();
+            // Check if user email or cpf exists
+            User[] checkUser = await (from u in db.Users
+                                      where (u.Email == user.Email || u.Cpf == user.Cpf)
+                                      where u.ID != user.ID
+                                      select u).Take(1).ToArrayAsync();
 
-            if (checkUserEmail.Any())
+            if (checkUser.Any())
             {
-                userEditResponse.ErrorEmail = true;
-                return userEditResponse;
-            }
+                if(checkUser.FirstOrDefault().Email == user.Email)
+                    userEditResponse.ErrorEmail = true;
 
-            // Check if user cpf exists
-            User[] checkUserCpf = await (from u in db.Users
-                                         where u.Cpf == user.Cpf
-                                         where u.ID != user.ID
-                                         select u).Take(1).ToArrayAsync();
+                if (checkUser.FirstOrDefault().Cpf == user.Cpf)
+                    userEditResponse.ErrorCpf = true;
 
-            if (checkUserCpf.Any())
-            {
-                userEditResponse.ErrorCpf = true;
                 return userEditResponse;
             }
 

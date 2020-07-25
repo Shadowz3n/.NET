@@ -154,6 +154,9 @@ namespace API.Controllers
 
             UserEditResponse editUser = await _userService.Edit(user);
 
+            if (editUser.ErrorId)
+                return BadRequest("error.user.invalid-id");
+
             if (editUser.ErrorEmail)
                 return BadRequest("error.user.email-exists");
 
