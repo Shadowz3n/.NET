@@ -183,6 +183,7 @@ namespace API.Services
 
             user.Password = new HashPassword().Generate(user.Password);
             user.CreatedAt = DateTime.Now;
+            user.ID = 0;
             db.Users.Add(user);
 
             // Save Log
