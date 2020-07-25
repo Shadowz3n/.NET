@@ -6,9 +6,9 @@
     public class Ip
     {
         /// <summary>
-        /// Gets the IPA ddress.
+        /// Gets the IP Address.
         /// </summary>
-        /// <returns>The IPA ddress.</returns>
+        /// <returns>The IP Address.</returns>
         public string GetIPAddress()
         {
             System.Web.HttpContext context = System.Web.HttpContext.Current;
