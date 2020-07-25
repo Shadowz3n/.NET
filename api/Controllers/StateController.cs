@@ -28,15 +28,15 @@ namespace API.Controllers
         }
 
         /// <summary>
-        /// Add the specified state.
+        /// Add or edit the specified state.
         /// </summary>
-        /// <returns>The add.</returns>
+        /// <returns>Add and Edit.</returns>
         /// <param name="state">State.</param>
         [HttpPost]
         [HttpPut]
         [Authorize(Roles = "Admin")]
         [Route("api/state")]
-        public async Task<object> Add([FromBody]State state)
+        public async Task<object> AddAndEdit([FromBody]State state)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.Values.SelectMany(start => start.Errors).Select(error => error.ErrorMessage).Take(1).ElementAt(0));

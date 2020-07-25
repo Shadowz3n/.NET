@@ -10,7 +10,7 @@ using API.Models;
 namespace API.Services
 {
     /// <summary>
-    /// User service.
+    /// State service.
     /// </summary>
     public class StateService : DbContext
     {
@@ -33,9 +33,9 @@ namespace API.Services
         }
 
         /// <summary>
-        /// Add the specified state.
+        /// Adds the and edit.
         /// </summary>
-        /// <returns>The add.</returns>
+        /// <returns>The and edit.</returns>
         /// <param name="state">State.</param>
         public async Task<object> AddAndEdit(State state)
         {
@@ -58,6 +58,11 @@ namespace API.Services
             return state.ID;
         }
 
+        /// <summary>
+        /// Delete the specified id.
+        /// </summary>
+        /// <returns>The delete.</returns>
+        /// <param name="id">Identifier.</param>
         public async Task<object> Delete(int id)
         {
             // Check if user id exists

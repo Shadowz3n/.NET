@@ -58,12 +58,4 @@ namespace API.Models
         [DataType(DataType.DateTime, ErrorMessage = "error.validation.invalid-deleted-at")]
         public DateTime? DeletedAt { get; set; }
     }
-
-    /// <summary>
-    /// State add response.
-    /// </summary>
-    public class StateAddResponse
-    {
-        public bool Error { get; set; }
-    }
 }
