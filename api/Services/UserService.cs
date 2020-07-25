@@ -187,6 +187,7 @@ namespace API.Services
             }
 
             user.Password = new HashPassword().Generate(user.Password);
+            user.CreatedAt = DateTime.Now;
             db.Users.Add(user);
 
             // Save Log
@@ -209,6 +210,11 @@ namespace API.Services
             return userAddResponse;
         }
 
+        /// <summary>
+        /// Edit the specified user.
+        /// </summary>
+        /// <returns>The edit.</returns>
+        /// <param name="user">User.</param>
         public async Task<UserEditResponse> Edit(User user)
         {
             // Edit response
@@ -247,6 +253,7 @@ namespace API.Services
             }
 
             user.Password = new HashPassword().Generate(user.Password);
+            user.UpdatedAt = DateTime.Now;
             db.Users.Add(user);
 
             // Save Log
