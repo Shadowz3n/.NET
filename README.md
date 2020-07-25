@@ -17,7 +17,7 @@
 * State - List
 * City - List
 
-## Setup settings (./api/Web.config)
+## Setup settings `./api/Web.config`
 
 | Name | Description |
 | ------ | ------ |
