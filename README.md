@@ -25,7 +25,7 @@
 | GoogleRecaptcha | [true/false] Enable Google Recaptcha (Login / Register) |
 | GoogleRecaptchaUrlApi | Google Recaptcha verify endpoint |
 | GoogleRecaptchaTokenApi | Google Recaptcha back-end secret |
-| HCaptcha | [(]true/false] Enable HCaptcha (Login / Register) |
+| HCaptcha | [true/false] Enable HCaptcha (Login / Register) |
 | HCaptchaUrlApi | HCaptcha verify endpoint |
 | HCaptchaTokenApi | HCaptcha back-end secret |
 | Mail | [true/false] Enable Mail Service (Register) |
