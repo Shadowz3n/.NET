@@ -106,12 +106,12 @@ namespace API.Controllers
         [HttpGet]
         [Route("api/users")]
         [Authorize(Roles = "Admin")]
-        public object List([FromUri]SearchParams searchParams)
+        public async Task<object> List([FromUri]SearchParams searchParams)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.Values.SelectMany(start => start.Errors).Select(error => error.ErrorMessage).Take(1).ElementAt(0));
 
-            return Ok(new { result = searchParams });
+            return Ok(await new UserService().List(searchParams));
         }
 
         // POST: api/user
