@@ -155,6 +155,34 @@ namespace API.Services
         }
 
         /// <summary>
+        /// Delete the specified id.
+        /// </summary>
+        /// <returns>The delete.</returns>
+        /// <param name="id">Identifier.</param>
+        public async Task<bool> Delete(int id)
+        {
+            // Check if user id exists
+            User[] user = await (from u in db.Users
+                                 where u.ID == id
+                                 select u).Take(1).ToArrayAsync();
+
+            if (!user.Any())
+                return false;
+
+            // Save Log
+            Log log = new Log
+            {
+                UserID = id,
+                Action = "user.delete"
+            };
+            await new LogService().Save(log);
+
+            user.FirstOrDefault().DeletedAt = DateTime.Now;
+            await db.SaveChangesAsync();
+            return true;
+        }
+
+        /// <summary>
         /// Dispose the specified disposing.
         /// </summary>
         /// <param name="disposing">If set to <c>true</c> disposing.</param>

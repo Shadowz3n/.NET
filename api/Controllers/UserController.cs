@@ -122,9 +122,9 @@ namespace API.Controllers
         [HttpPost]
         [Route("api/user")]
         [Authorize(Roles = "Admin")]
-        public object Add()
+        public object Add([FromBody]User user)
         {
-            return Ok(new { });
+            return Ok(user);
         }
 
         // PUT: api/user
@@ -147,11 +147,11 @@ namespace API.Controllers
         /// <returns>The id.</returns>
         /// <param name="id">Identifier.</param>
         [HttpDelete]
-        [Route("api/user/{id:int}")]
+        [Route("api/user")]
         [Authorize(Roles = "Admin")]
-        public object Delete(int id)
+        public async Task<object> Delete([FromBody]int id)
         {
-            return Ok(new { id });
+            return Ok(await new UserService().Delete(id));
         }
     }
 }
