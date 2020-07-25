@@ -57,6 +57,9 @@ namespace API.Models
         public int RoleID { get; set; }
 
         [NotMapped]
+        public string Role { get; set; }
+
+        [NotMapped]
         [Required(ErrorMessage = "error.validation.invalid-jwt-token")]
         public string JwtToken { get; set; }
 
@@ -65,7 +68,7 @@ namespace API.Models
         public string Token { get; set; }
 
         [Column("AcceptReleases")]
-        public bool AcceptReleases { get; set; }
+        public int? AcceptReleases { get; set; }
 
         [Column("CreatedAt")]
         [DataType(DataType.DateTime, ErrorMessage = "error.validation.invalid-created-at")]
@@ -131,16 +134,25 @@ namespace API.Models
         public string Token { get; set; }
 
         [Column("RoleID")]
+        [Range(1, 9999999, ErrorMessage = "error.validation.invalid-role-id")]
         public int RoleID { get; set; }
 
         [Column("AcceptReleases")]
-        public bool AcceptReleases { get; set; }
+        public int? AcceptReleases { get; set; }
     }
 
     /// <summary>
     /// User register response.
     /// </summary>
     public class UserRegisterResponse
+    {
+        public string TokenType { get; set; }
+        public string AccessToken { get; set; }
+        public bool ErrorEmail { get; set; }
+        public bool ErrorCpf { get; set; }
+    }
+
+    public class UserAddResponse
     {
         public string TokenType { get; set; }
         public string AccessToken { get; set; }

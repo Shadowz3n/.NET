@@ -122,9 +122,20 @@ namespace API.Controllers
         [HttpPost]
         [Route("api/user")]
         [Authorize(Roles = "Admin")]
-        public object Add([FromBody]User user)
+        public async Task<object> Add([FromBody]User user)
         {
-            return Ok(user);
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState.Values.SelectMany(start => start.Errors).Select(error => error.ErrorMessage).Take(1).ElementAt(0));
+
+            UserAddResponse addUser = await new UserService().Add(user);
+
+            if (addUser.ErrorEmail)
+                return BadRequest("error.user.email-exists");
+
+            if (addUser.ErrorCpf)
+                return BadRequest("error.user.cpf-exists");
+
+            return Ok(addUser);
         }
 
         // PUT: api/user
@@ -135,8 +146,11 @@ namespace API.Controllers
         [HttpPut]
         [Route("api/user")]
         [Authorize(Roles = "Admin")]
-        public object Edit()
+        public object Edit([FromBody]User user)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState.Values.SelectMany(start => start.Errors).Select(error => error.ErrorMessage).Take(1).ElementAt(0));
+
             return Ok(new { });
         }
 

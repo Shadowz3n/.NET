@@ -90,22 +90,22 @@ namespace API.Services
             UserRegisterResponse userRegisterResponse = new UserRegisterResponse();
 
             // Check if user email exists
-            User[] checkUseEmail = await (from u in db.Users
+            User[] checkUserEmail = await (from u in db.Users
                                     where u.Email == userRegister.Email
                                     select u).Take(1).ToArrayAsync();
 
-            if (checkUseEmail.Any())
+            if (checkUserEmail.Any())
             {
                 userRegisterResponse.ErrorEmail = true;
                 return userRegisterResponse;
             }
 
             // Check if user cpf exists
-            User[] checkUseCpf = await (from u in db.Users
+            User[] checkUserCpf = await (from u in db.Users
                                         where u.Cpf == userRegister.Cpf
                                         select u).Take(1).ToArrayAsync();
 
-            if (checkUseCpf.Any())
+            if (checkUserCpf.Any())
             {
                 userRegisterResponse.ErrorCpf = true;
                 return userRegisterResponse;
@@ -152,6 +152,61 @@ namespace API.Services
             userRegisterResponse.AccessToken = _tokenManager.Generate(claims);
 
             return userRegisterResponse;
+        }
+
+        /// <summary>
+        /// Add the specified user.
+        /// </summary>
+        /// <returns>The add.</returns>
+        /// <param name="user">User.</param>
+        public async Task<UserAddResponse> Add(User user)
+        {
+            // Register response
+            UserAddResponse userAddResponse = new UserAddResponse();
+
+            // Check if user email exists
+            User[] checkUserEmail = await (from u in db.Users
+                                          where u.Email == user.Email
+                                          select u).Take(1).ToArrayAsync();
+
+            if (checkUserEmail.Any())
+            {
+                userAddResponse.ErrorEmail = true;
+                return userAddResponse;
+            }
+
+            // Check if user cpf exists
+            User[] checkUserCpf = await (from u in db.Users
+                                        where u.Cpf == user.Cpf
+                                        select u).Take(1).ToArrayAsync();
+
+            if (checkUserCpf.Any())
+            {
+                userAddResponse.ErrorCpf = true;
+                return userAddResponse;
+            }
+
+            user.Password = new HashPassword().Generate(user.Password);
+            db.Users.Add(user);
+
+            // Save Log
+            Log log = new Log
+            {
+                UserID = user.ID,
+                Action = "user.add"
+            };
+            await new LogService().Save(log);
+
+            Claim[] claims = {
+                new Claim(ClaimTypes.Name, user.Name),
+                new Claim(ClaimTypes.Email, user.Email),
+                new Claim(ClaimTypes.Role, user.Role)
+            };
+
+            userAddResponse.TokenType = "Bearer";
+            userAddResponse.AccessToken = _tokenManager.Generate(claims);
+
+            return userAddResponse;
         }
 
         /// <summary>
