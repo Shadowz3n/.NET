@@ -121,6 +121,7 @@ namespace API.Services
                 Name = userRegister.Name,
                 Lastname = userRegister.Lastname,
                 Email = userRegister.Email,
+                AcceptReleases = userRegister.AcceptReleases,
                 Password = new HashPassword().Generate(userRegister.Password),
                 StateID = userRegister.StateID,
                 CityID = userRegister.CityID,

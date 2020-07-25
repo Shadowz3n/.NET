@@ -64,6 +64,9 @@ namespace API.Models
         [Required(ErrorMessage = "error.validation.invalid-token")]
         public string Token { get; set; }
 
+        [Column("AcceptReleases")]
+        public bool AcceptReleases { get; set; }
+
         [Column("CreatedAt")]
         [DataType(DataType.DateTime, ErrorMessage = "error.validation.invalid-created-at")]
         public DateTime CreatedAt { get; set; }
@@ -129,6 +132,9 @@ namespace API.Models
 
         [Column("RoleID")]
         public int RoleID { get; set; }
+
+        [Column("AcceptReleases")]
+        public bool AcceptReleases { get; set; }
     }
 
     /// <summary>
