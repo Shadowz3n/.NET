@@ -4,33 +4,30 @@ using System.Security.Claims;
 using System.Web.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
-namespace API.Filters
+namespace API.Utils.Helper
 {
     /// <summary>
     /// Token manager.
     /// </summary>
-    public static class TokenManager
+    public class TokenManager
     {
         /// <summary>
         /// The secret.
         /// </summary>
-        public static string Secret = WebConfigurationManager.AppSettings["JWTToken"];
+        public static string _secret = WebConfigurationManager.AppSettings["JWTToken"];
 
         /// <summary>
         /// Generates the token.
         /// </summary>
         /// <returns>The token.</returns>
-        /// <param name="userName">User name.</param>
-        public static string GenerateToken(string userName, string role)
+        /// <param name="claims">Claims.</param>
+        public string Generate(Claim[] claims)
         {
-            byte[] key = Convert.FromBase64String(Secret);
+            byte[] key = Convert.FromBase64String(_secret);
             SymmetricSecurityKey securityKey = new SymmetricSecurityKey(key);
             SecurityTokenDescriptor descriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(new[] { 
-                    new Claim(ClaimTypes.Name, userName),
-                    new Claim(ClaimTypes.Role, role)
-                }),
+                Subject = new ClaimsIdentity(claims),
                 Expires = DateTime.UtcNow.AddDays(1),
                 SigningCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature)
             };

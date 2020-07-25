@@ -21,6 +21,7 @@ namespace API.DAL
         /// </summary>
         /// <value>The users.</value>
         public DbSet<User> Users { get; set; }
+        public DbSet<UserRole> UserRoles { get; set; }
         public DbSet<State> States { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<Log> Logs { get; set; }

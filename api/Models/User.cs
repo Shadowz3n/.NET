@@ -48,12 +48,15 @@ namespace API.Models
         [Required(ErrorMessage = "error.validation.invalid-token")]
         public string Token { get; set; }
 
+        [Column("CreatedAt")]
         [DataType(DataType.DateTime, ErrorMessage = "error.validation.invalid-created-at")]
         public DateTime CreatedAt { get; set; }
 
+        [Column("UpdatedAt")]
         [DataType(DataType.DateTime, ErrorMessage = "error.validation.invalid-updated-at")]
         public DateTime UpdatedAt { get; set; }
 
+        [Column("DeletedAt")]
         [DataType(DataType.DateTime, ErrorMessage = "error.validation.invalid-deleted-at")]
         public DateTime? DeletedAt { get; set; }
     }

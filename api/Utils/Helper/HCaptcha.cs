@@ -5,10 +5,18 @@ using System.Web.Configuration;
 
 namespace API.Utils.Helper
 {
+    /// <summary>
+    /// HCaptcha.
+    /// </summary>
     public class HCaptcha
     {
         static HttpClient client = new HttpClient();
 
+        /// <summary>
+        /// Validates the HCaptcha.
+        /// </summary>
+        /// <returns>The HCaptcha.</returns>
+        /// <param name="token">Token.</param>
         public async Task<HttpResponseMessage> ValidateHCaptcha(string token)
         {
 

@@ -1,7 +1,9 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Configuration;
 using System.Web.Http;
 using API.Models;
+using API.Services;
 
 namespace API.Controllers
 {
@@ -21,7 +23,7 @@ namespace API.Controllers
         [HttpPost]
         [AllowAnonymous]
         [Route("api/user/login")]
-        public object Login([FromBody]UserLogin userLogin)
+        public async Task<object> Login([FromBody]UserLogin userLogin)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.Values.SelectMany(start => start.Errors).Select(error => error.ErrorMessage).Take(1).ElementAt(0));
@@ -31,7 +33,12 @@ namespace API.Controllers
 
             }
 
-            return Ok(new { result = userLogin });
+            object user = await new UserService().Auth(userLogin);
+
+            if (user == null)
+                return BadRequest("error.validation.incorrect-login");
+
+            return Ok(user);
         }
 
         // POST: api/user/register
