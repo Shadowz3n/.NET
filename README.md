@@ -21,7 +21,7 @@
 
 | Name | Value | Description |
 | ------ | ------ | ------ |
-| connectionStrings | [Doc](https://docs.microsoft.com/pt-br/dotnet/api/system.configuration.configurationmanager.connectionstrings?view=netframework-4.5) | Set your database connection here |
+| connectionStrings | [Documentation](https://docs.microsoft.com/pt-br/dotnet/api/system.configuration.configurationmanager.connectionstrings?view=netframework-4.5) | Set your database connection here |
 | GoogleRecaptcha | boolean | Enable Google Recaptcha (Login / Register) |
 | GoogleRecaptchaUrlApi | string | Google Recaptcha verify endpoint |
 | GoogleRecaptchaTokenApi | string | Google Recaptcha back-end secret |
