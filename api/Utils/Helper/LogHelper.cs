@@ -6,10 +6,18 @@ using API.Models;
 
 namespace API.Utils.Helper
 {
+    /// <summary>
+    /// Log helper.
+    /// </summary>
     public class LogHelper : DbContext
     {
         private APIContext db = new APIContext();
 
+        /// <summary>
+        /// Save the specified log.
+        /// </summary>
+        /// <returns>The save.</returns>
+        /// <param name="log">Log.</param>
         public async Task<object> Save(Log log)
         {
             /* Save to log */
