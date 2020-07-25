@@ -178,6 +178,8 @@
     <Compile Include="Utils\Helper\TokenManager.cs" />
     <Compile Include="Utils\Helper\Ip.cs" />
     <Compile Include="Utils\Helper\MailService.cs" />
+    <Compile Include="Utils\Helper\RenderRazor.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />
