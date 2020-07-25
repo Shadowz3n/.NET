@@ -49,6 +49,7 @@ namespace API.Services
                             where u.Password == passwordHash
                             where u.DeletedAt == null
                             select new {
+                               u.ID,
                                u.Name,
                                u.Email,
                                r.Role
@@ -65,6 +66,14 @@ namespace API.Services
 
             string tokenType = "Bearer";
             string accessToken = _tokenManager.Generate(claims);
+
+            // Save Log
+            Log log = new Log
+            {
+                UserID = user.FirstOrDefault().ID,
+                Action = "user.login"
+            };
+            await new LogHelper().Save(log);
 
             return new { tokenType, accessToken };
         }
