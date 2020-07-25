@@ -12,6 +12,8 @@ namespace API.Controllers
     [Authorize]
     public class LogController : ApiController
     {
+        private LogService _logService = new LogService();
+
         /// <summary>
         /// List the specified searchParams.
         /// </summary>
@@ -25,7 +27,7 @@ namespace API.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.Values.SelectMany(start => start.Errors).Select(error => error.ErrorMessage).Take(1).ElementAt(0));
 
-            return Ok(await new LogService().List(searchParams));
+            return Ok(await _logService.List(searchParams));
         }
     }
 }

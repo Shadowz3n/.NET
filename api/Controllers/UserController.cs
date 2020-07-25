@@ -14,6 +14,7 @@ namespace API.Controllers
     [Authorize]
     public class UserController : ApiController
     {
+        private UserService _userService = new UserService();
         private Google _google = new Google();
         private HCaptcha _hCaptcha = new HCaptcha();
 
@@ -48,7 +49,7 @@ namespace API.Controllers
                     return BadRequest("error.validation.invalid-hcaptcha");
             }
 
-            object user = await new UserService().Auth(userLogin);
+            object user = await _userService.Auth(userLogin);
             if (user == null)
                 return BadRequest("error.validation.incorrect-login");
 
@@ -86,7 +87,7 @@ namespace API.Controllers
                     return BadRequest("error.validation.invalid-hcaptcha");
             }
 
-            UserRegisterResponse user = await new UserService().Register(userRegister);
+            UserRegisterResponse user = await _userService.Register(userRegister);
 
             if (user.ErrorEmail)
                 return BadRequest("error.user.email-exists");
@@ -111,7 +112,7 @@ namespace API.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.Values.SelectMany(start => start.Errors).Select(error => error.ErrorMessage).Take(1).ElementAt(0));
 
-            return Ok(await new UserService().List(searchParams));
+            return Ok(await _userService.List(searchParams));
         }
 
         // POST: api/user
@@ -127,7 +128,7 @@ namespace API.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.Values.SelectMany(start => start.Errors).Select(error => error.ErrorMessage).Take(1).ElementAt(0));
 
-            UserAddResponse addUser = await new UserService().Add(user);
+            UserAddResponse addUser = await _userService.Add(user);
 
             if (addUser.ErrorEmail)
                 return BadRequest("error.user.email-exists");
@@ -151,7 +152,7 @@ namespace API.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.Values.SelectMany(start => start.Errors).Select(error => error.ErrorMessage).Take(1).ElementAt(0));
 
-            UserEditResponse editUser = await new UserService().Edit(user);
+            UserEditResponse editUser = await _userService.Edit(user);
 
             if (editUser.ErrorEmail)
                 return BadRequest("error.user.email-exists");
@@ -173,7 +174,7 @@ namespace API.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<object> Delete([FromBody]int id)
         {
-            return Ok(await new UserService().Delete(id));
+            return Ok(await _userService.Delete(id));
         }
     }
 }

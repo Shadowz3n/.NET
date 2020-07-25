@@ -11,6 +11,8 @@ namespace API.Controllers
     [Authorize]
     public class StateController : ApiController
     {
+        private StateService _stateService = new StateService();
+
         /// <summary>
         /// List the specified searchParams.
         /// </summary>
@@ -21,7 +23,7 @@ namespace API.Controllers
         [Route("api/states")]
         public async Task<object> List([FromUri]SearchParams searchParams)
         {
-            return Ok(await new StateService().List(searchParams));
+            return Ok(await _stateService.List(searchParams));
         }
     }
 }

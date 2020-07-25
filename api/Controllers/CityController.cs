@@ -11,6 +11,8 @@ namespace API.Controllers
     [Authorize]
     public class CityController : ApiController
     {
+        private CityService _cityService = new CityService();
+
         /// <summary>
         /// List the specified searchParams.
         /// </summary>
@@ -21,15 +23,20 @@ namespace API.Controllers
         [Route("api/cities")]
         public async Task<object> List([FromUri]SearchParams searchParams)
         {
-            return Ok(await new CityService().List(searchParams));
+            return Ok(await _cityService.List(searchParams));
         }
 
+        /// <summary>
+        /// List cities the specified stateId.
+        /// </summary>
+        /// <returns>The list.</returns>
+        /// <param name="stateId">State identifier.</param>
         [HttpGet]
         [AllowAnonymous]
         [Route("api/cities/:stateId")]
         public async Task<object> List([FromUri]int stateId)
         {
-            return Ok(await new CityService().ByStateId(stateId));
+            return Ok(await _cityService.ByStateId(stateId));
         }
     }
 }
