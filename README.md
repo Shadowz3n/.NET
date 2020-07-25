@@ -19,9 +19,9 @@
 
 ## Setup settings (./api/Web.config)
 
-| Settings | Web.config |
+| Name | Description |
 | ------ | ------ |
-| connectionStrings | Set your database connection |
+| <connectionStrings> | Set your database connection |
 | GoogleRecaptcha | [true/false] Enable Google Recaptcha (Login / Register) |
 | GoogleRecaptchaUrlApi | Google Recaptcha verify endpoint |
 | GoogleRecaptchaTokenApi | Google Recaptcha back-end secret |
