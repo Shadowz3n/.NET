@@ -129,6 +129,6 @@ namespace API.Models
 
         [NotMapped]
         [Required(ErrorMessage = "error.validation.invalid-token")]
-        public string UToken { get; set; }
+        public string Token { get; set; }
     }
 }

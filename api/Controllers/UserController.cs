@@ -4,6 +4,7 @@ using System.Web.Configuration;
 using System.Web.Http;
 using API.Models;
 using API.Services;
+using API.Utils.Helper;
 
 namespace API.Controllers
 {
@@ -13,6 +14,9 @@ namespace API.Controllers
     [Authorize]
     public class UserController : ApiController
     {
+        private Google _google = new Google();
+        private HCaptcha _hCaptcha = new HCaptcha();
+
         // POST: api/user/login
         /// <summary>
         /// Returns user login response
@@ -28,9 +32,20 @@ namespace API.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.Values.SelectMany(start => start.Errors).Select(error => error.ErrorMessage).Take(1).ElementAt(0));
 
+            // Google Recaptcha Validation
             if (WebConfigurationManager.AppSettings["GoogleRecaptcha"] == "true")
             {
+                GoogleResponse googleResponse = await _google.ValidateRecaptcha<GoogleResponse>(userLogin.Token);
+                if (!googleResponse.Success)
+                    return BadRequest("error.validation.invalid-recaptcha");
+            }
 
+            // HCaptcha Validation
+            if (WebConfigurationManager.AppSettings["HCaptcha"] == "true")
+            {
+                HCaptchaResponse hCaptchaResponse = await _hCaptcha.Validate<HCaptchaResponse>(userLogin.Token);
+                if (!hCaptchaResponse.Success)
+                    return BadRequest("error.validation.invalid-hcaptcha");
             }
 
             object user = await new UserService().Auth(userLogin);
@@ -50,14 +65,25 @@ namespace API.Controllers
         [HttpPost]
         [AllowAnonymous]
         [Route("api/user/register")]
-        public object Register([FromBody]User user)
+        public async Task<object> Register([FromBody]User user)
         {
             if(!ModelState.IsValid)
                 return BadRequest(ModelState.Values.SelectMany(start => start.Errors).Select(error => error.ErrorMessage).Take(1).ElementAt(0));
 
+            // Google Recaptcha Validation
             if (WebConfigurationManager.AppSettings["GoogleRecaptcha"] == "true")
             {
-                
+                GoogleResponse googleResponse = await _google.ValidateRecaptcha<GoogleResponse>(user.Token);
+                if (!googleResponse.Success)
+                    return BadRequest("error.validation.invalid-recaptcha");
+            }
+
+            // HCaptcha Validation
+            if (WebConfigurationManager.AppSettings["HCaptcha"] == "true")
+            {
+                HCaptchaResponse hCaptchaResponse = await _hCaptcha.Validate<HCaptchaResponse>(user.Token);
+                if (!hCaptchaResponse.Success)
+                    return BadRequest("error.validation.invalid-hcaptcha");
             }
 
             return Ok(new { result =  user });
