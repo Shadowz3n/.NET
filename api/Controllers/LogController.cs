@@ -17,8 +17,8 @@ namespace API.Controllers
         /// <returns>The list.</returns>
         /// <param name="searchParams">Search parameters.</param>
         [HttpGet]
-        [AllowAnonymous]
         [Route("api/logs")]
+        [Authorize(Roles = "Admin")]
         public async Task<object> List([FromUri]SearchParams searchParams)
         {
             return Ok(await new LogService().List(searchParams));

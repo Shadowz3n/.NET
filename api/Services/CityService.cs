@@ -45,7 +45,7 @@ namespace API.Services
         protected override void Dispose(bool disposing)
         {
             if (disposing)
-                this.db.Dispose();
+                db.Dispose();
 
             base.Dispose(disposing);
         }
