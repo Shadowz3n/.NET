@@ -7,3 +7,4 @@
 * API Route Filter
 * Google Recaptcha
 * HCaptcha
+* Custom Data Annotations
