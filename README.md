@@ -16,3 +16,10 @@
 * User - List / Login / Register / Add / Edit / Delete
 * State - List
 * City - List
+
+
+## Setup
+
+* Change "appSettings" ./Web.config
+	* GoogleRecaptcha : Enable Google Recaptcha
+	* HCaptcha : Enable HCaptcha
