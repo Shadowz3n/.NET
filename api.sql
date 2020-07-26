@@ -15,7 +15,6 @@ CREATE TABLE Users (
     CPF varchar(255) NULL,
     CNPJ varchar(255) NULL,
     RoleID INT,
-    Role varchar(255) NULL,
     AcceptReleases INT NULL,
     CreatedAt TIMESTAMP NOT NULL,
     UpdatedAt TIMESTAMP NULL,
