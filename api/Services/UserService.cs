@@ -3,6 +3,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Linq.Dynamic;
 using System.Security.Claims;
+using System.Threading;
 using System.Threading.Tasks;
 using API.DAL;
 using API.Models;
@@ -70,9 +71,10 @@ namespace API.Services
             string accessToken = _tokenManager.Generate(claims);
 
             // Save Log
+            int userId = int.Parse(Thread.CurrentPrincipal.Identity.Name);
             Log log = new Log
             {
-                UserID = user.FirstOrDefault().ID,
+                UserID = userId,
                 Action = "user.login"
             };
             await new LogService().Save(log);
@@ -135,16 +137,17 @@ namespace API.Services
             await db.SaveChangesAsync();
 
             // Save Log
+            int userId = int.Parse(Thread.CurrentPrincipal.Identity.Name);
             Log log = new Log
             {
-                UserID = user.ID,
+                UserID = userId,
                 Action = "user.register"
             };
             await new LogService().Save(log);
 
             // User Token
             Claim[] claims = {
-                new Claim(ClaimTypes.Name, userRegister.Name),
+                new Claim(ClaimTypes.Name, userRegister.FirstName),
                 new Claim(ClaimTypes.Email, userRegister.Email),
                 new Claim(ClaimTypes.Role, roleId.ToString())
             };
@@ -188,9 +191,10 @@ namespace API.Services
             db.Users.Add(user);
 
             // Save Log
+            int userId = int.Parse(Thread.CurrentPrincipal.Identity.Name);
             Log log = new Log
             {
-                UserID = user.ID,
+                UserID = userId,
                 Action = "user.add"
             };
             await new LogService().Save(log);
@@ -247,9 +251,10 @@ namespace API.Services
             db.Users.Add(user);
 
             // Save Log
+            int userId = int.Parse(Thread.CurrentPrincipal.Identity.Name);
             Log log = new Log
             {
-                UserID = user.ID,
+                UserID = userId,
                 Action = "user.edit"
             };
             await new LogService().Save(log);
@@ -282,9 +287,10 @@ namespace API.Services
                 return false;
 
             // Save Log
+            int userId = int.Parse(Thread.CurrentPrincipal.Identity.Name);
             Log log = new Log
             {
-                UserID = id,
+                UserID = userId,
                 Action = "user.delete"
             };
             await new LogService().Save(log);
