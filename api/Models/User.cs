@@ -21,17 +21,17 @@ namespace API.Models
         /// Gets or sets the name.
         /// </summary>
         /// <value>The name.</value>
-        [Column("Name")]
+        [Column("FirstName")]
         [StringLength(255, MinimumLength = 3, ErrorMessage = "error.validation.invalid-name")]
-        public string Name { get; set; }
+        public string FirstName { get; set; }
 
         /// <summary>
         /// Gets or sets the lastname.
         /// </summary>
         /// <value>The lastname.</value>
-        [Column("Lastname")]
+        [Column("LastName")]
         [StringLength(255, MinimumLength = 3, ErrorMessage = "error.validation.invalid-lastname")]
-        public string Lastname { get; set; }
+        public string LastName { get; set; }
 
         /// <summary>
         /// Gets or sets the email.
@@ -162,7 +162,7 @@ namespace API.Models
         /// <value>The name.</value>
         [Column("Name")]
         [StringLength(255, MinimumLength = 3, ErrorMessage = "error.validation.invalid-name")]
-        public string Name { get; set; }
+        public string FirstName { get; set; }
 
         /// <summary>
         /// Gets or sets the lastname.
@@ -170,7 +170,7 @@ namespace API.Models
         /// <value>The lastname.</value>
         [Column("Lastname")]
         [StringLength(255, MinimumLength = 3, ErrorMessage = "error.validation.invalid-lastname")]
-        public string Lastname { get; set; }
+        public string LastName { get; set; }
 
         /// <summary>
         /// Gets or sets the email.

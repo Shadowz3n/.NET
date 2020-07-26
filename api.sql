@@ -6,8 +6,8 @@ GO
 
 CREATE TABLE Users (
     ID int IDENTITY(1,1) PRIMARY KEY,
-    Name varchar(255) NULL,
-    Lastname varchar(255) NULL,
+    FirstName varchar(255) NULL,
+    LastName varchar(255) NULL,
     Email varchar(255),
     Password varchar(255) NULL,
     CityID INT NULL,

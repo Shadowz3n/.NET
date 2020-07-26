@@ -51,8 +51,9 @@ namespace API.Services
                             where u.DeletedAt == null
                             select new {
                                u.ID,
-                               u.Name,
-                               u.Email,
+                               u.FirstName,
+                                u.LastName,
+                                u.Email,
                                r.Role
                             }).Take(1).ToArrayAsync();
 
@@ -60,7 +61,7 @@ namespace API.Services
                 return null;
 
             Claim[] claims = {
-                new Claim(ClaimTypes.Name, user.FirstOrDefault().Name),
+                new Claim(ClaimTypes.Name, user.FirstOrDefault().FirstName),
                 new Claim(ClaimTypes.Email, user.FirstOrDefault().Email),
                 new Claim(ClaimTypes.Role, user.FirstOrDefault().Role)
             };
@@ -118,8 +119,8 @@ namespace API.Services
             // Save User
             User user = new User
             {
-                Name = userRegister.Name,
-                Lastname = userRegister.Lastname,
+                FirstName = userRegister.FirstName,
+                LastName = userRegister.LastName,
                 Email = userRegister.Email,
                 AcceptReleases = userRegister.AcceptReleases,
                 Password = new HashPassword().Generate(userRegister.Password),
@@ -195,7 +196,7 @@ namespace API.Services
             await new LogService().Save(log);
 
             Claim[] claims = {
-                new Claim(ClaimTypes.Name, user.Name),
+                new Claim(ClaimTypes.Name, user.FirstName),
                 new Claim(ClaimTypes.Email, user.Email),
                 new Claim(ClaimTypes.Role, user.Role)
             };
@@ -254,7 +255,7 @@ namespace API.Services
             await new LogService().Save(log);
 
             Claim[] claims = {
-                new Claim(ClaimTypes.Name, user.Name),
+                new Claim(ClaimTypes.Name, user.FirstName),
                 new Claim(ClaimTypes.Email, user.Email),
                 new Claim(ClaimTypes.Role, user.Role)
             };
