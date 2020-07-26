@@ -30,7 +30,7 @@ namespace API.Models
         /// </summary>
         /// <value>The state identifier.</value>
         [Column("StateID")]
-        [MaxLength(10)]
+        [Range(1, 9999999, ErrorMessage = "error.validation.invalid-state-id")]
         [Required(ErrorMessage = "error.validation.invalid-state-id")]
         public int StateID { get; set; }
 
