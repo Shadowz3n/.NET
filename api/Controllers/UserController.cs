@@ -1,10 +1,10 @@
-﻿using System.Linq;
+﻿using API.Models;
+using API.Services;
+using API.Utils.Helper;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Configuration;
 using System.Web.Http;
-using API.Models;
-using API.Services;
-using API.Utils.Helper;
 
 namespace API.Controllers
 {
